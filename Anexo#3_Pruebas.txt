@@ -1,0 +1,70 @@
+
+Agregar Roles
+
+mutation{
+	RegisterRol(rol:"BASIC")
+}
+mutation{
+	RegisterRol(rol:"MODERATOR")
+}
+mutation{
+	RegisterRol(rol:"ADMIN")
+}
+
+Agregamos Permisos
+
+mutation{
+	RegisterPermission(permission:"Configurar",guard:"ruta/ruta")
+}
+
+mutation{
+	RegisterPermission(permission:"Usuarios",guard:"ruta/ruta")
+}
+
+mutation{
+	RegisterPermission(permission:"Estadisticas",guard:"ruta/ruta")
+}
+
+Asigamos los permisos a los roles
+
+mutation{
+	RegisterAccess(fk_rol:3, fk_permission:1)
+}
+mutation{
+	RegisterAccess(fk_rol:3, fk_permission:2)
+}
+mutation{
+	RegisterAccess(fk_rol:3, fk_permission:3)
+}
+
+Agregar un nuevo usuario
+mutation{
+  RegisterUser(
+    password:"12345",
+    state: "a",
+    user: "rmora",
+    authenticated: "a",
+    fk_rol: 3,
+    direction: "no tiene",
+    identificationID: "123456789",
+    lastname2: "vargas",
+    lastname1: "mora",
+    name: "ruben"
+  )
+}
+
+Obtener token y logear usuario.
+
+mutation{
+  Login(user:"rmora", password:"12345"){
+    accessToken
+  }
+}
+Obtener lista de todos los usuarios
+
+{
+  users{
+    ID_User
+    User
+  }
+}
