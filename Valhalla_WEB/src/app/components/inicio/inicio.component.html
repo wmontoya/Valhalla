@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img height="80" class="logo" src="../../../assets/images/Logo.png"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 ">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/publicaciones">Publicaciones</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Configuraciones</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Reportes</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Alertas</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+              data-bs-display="static">
+              <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> {{usurio}}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+              <li><button class="dropdown-item" type="button"><i class="fa fa-user" aria-hidden="true"></i>
+                  Perfil</button></li>
+              <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><i class="fa fa-sign-in" aria-hidden="true"></i>
+                  Login</button></li>
+              <li><button class="dropdown-item" type="button"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                  Logout</button></li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="card mt-2" *ngFor="let ofertas of listaTipoOfertas; let i = index;">
+          <img src="../../../assets/images/desarrollo.jpg" height="300" class="card-img-top" alt="...">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h3>Servicio de {{ofertas.ServiceName}}</h3>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>Fecha:</th>
+                      <td>{{ofertas.Date}}</td>
+                      <th>Precio por Hora:</th>
+                      <td>{{ofertas.Price}}</td>
+                    </tr>
+                    <tr>
+                      <th>Oferente:</th>
+                      <td>{{ofertas.FK_User.FK_Person.Name+' '+ofertas.FK_User.FK_Person.Lastname1+'
+                        '+ofertas.FK_User.FK_Person.Lastname2}}</td>
+                      <th>Identificación:</th>
+                      <td>{{ofertas.FK_User.FK_Person.IdentificationID}}</td>
+                    </tr>
+                    <tr>
+                      <th>{{ofertas.contacts[0].TypeContact}}:</th>
+                      <td>{{ofertas.contacts[0].Contact}}</td>
+                      <th>{{ofertas.contacts[1].TypeContact}}:</th>
+                      <td>{{ofertas.contacts[1].Contact}}</td>
+                    </tr>
+                    <tr>
+                      <th>Categoria:</th>
+                      <td>{{ofertas.FK_TypeOffer.TypeOffer}}</td>
+                      <th>Calificación:</th>
+                      <td>{{ofertas.Price}}</td>
+                    </tr>
+                    <tr>
+                      <th>Insignias:</th>
+                      <td><button type="button" data-bs-toggle="modal1" data-bs-target="#exampleModal1" [disabled]="ofertas.calificacion != null ? false:true"
+                          class="btn btn-success"><i class="fa fa-handshake-o" aria-hidden="true"></i></button></td>
+                      <th>Reseñas:</th>
+                      <td><button type="button" data-bs-toggle="modal2" data-bs-target="#exampleModal2" [disabled]="ofertas.resena != null ? false:true"
+                          class="btn btn-success"><i class="fa fa-file-text-o" aria-hidden="true"></i></button></td>
+                    </tr>
+                    <tr>
+                      <th>Calificación:</th>
+                      <td *ngIf="ofertas.calificacion.Rating == '1'"><i class="fa fa-star" aria-hidden="true"></i></td>
+                      <th *ngIf="ofertas.calificacion.Rating == '2'"><i class="fa fa-star" aria-hidden="true"></i><i
+                          class="fa fa-star" aria-hidden="true"></i></th>
+                      <td *ngIf="ofertas.calificacion.Rating == '3'"><i class="fa fa-star" aria-hidden="true"></i><i
+                          class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
+                      <td *ngIf="ofertas.calificacion.Rating == '4'"><i class="fa fa-star" aria-hidden="true"></i><i
+                          class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
+                          class="fa fa-star" aria-hidden="true"></i></td>
+                      <td *ngIf="ofertas.calificacion.Rating == '5'"><i class="fa fa-star" aria-hidden="true"></i><i
+                          class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
+                          class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
+                      <td *ngIf="ofertas.calificacion.Rating == '0'">Sin Calificar</td>
+                      <td>
+                        
+                      </td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+            <div class="row mb-3">
+              <div class="card">
+                <div class="card-body">
+                  {{ofertas.ServiceDescription}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <agm-map [latitude]='ofertas.Latitude' [longitude]='ofertas.Longitude' [zoom]='16'>
+                  <agm-marker [latitude]="ofertas.Latitude" [longitude]="ofertas.Longitude">
+                  </agm-marker>
+                </agm-map>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+    </div>
+    <!-- Modales -->
+ 
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ventana de Inicio de Sesión</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="email" [(ngModel)]="user" class="form-control" id="floatingInput" placeholder="name@example.com">
+              <label for="floatingInput">Usuario</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" [(ngModel)]="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+              <label for="floatingPassword">Contraseña</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger"><i class="fa fa-google" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary"><i class="fa fa-facebook" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" (click)="login()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+
+</html>

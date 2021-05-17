@@ -5,6 +5,8 @@ import { VHL_Users } from "../entities/users";
 import enviroment from "../config/enviroments.config";
 import { sign } from "jsonwebtoken";
 import { PersonResolver} from "../resolvers/person.resolver"
+import { VHL_Persons } from "../entities/persons";
+import { VHL_Roles } from "../entities/roles";
 
 @ObjectType()
 class LoginResponse {
@@ -20,7 +22,7 @@ export class UserResolver {
 
     @Query(() => [VHL_Users])
     async users() {
-        return VHL_Users.find();
+        return VHL_Users.find({ relations: ["FK_Person", "FK_Rol"] });
     }
  
     @Mutation(() => String)
@@ -41,12 +43,14 @@ export class UserResolver {
         try {
             
             let person =  this.personresolver.RegisterPerson(name,lastname1,lastname2,identificationID,direction);
-            let resultado:number = 0;
-            await person.then((per)=>{ resultado = parseInt(per!.toString());})
+            let resultado:VHL_Persons = new VHL_Persons();
+            let rol:VHL_Roles = new VHL_Roles();
+            rol.ID_Rol = fk_rol;
+            await person.then((per)=>{ resultado.ID_Person = per!})
             await VHL_Users.insert({
                 User:user,
                 FK_Person: resultado,
-                FK_Rol:fk_rol,
+                FK_Rol: rol,
                 State:state,
                 Authenticated:authenticated,
                 Password: hashedPassword

@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, JoinColumn, ManyToOne } from "typeorm";
-import { ObjectType, Field, ID, Authorized } from "type-graphql";
+import { ObjectType, Field, ID, Authorized, Int } from "type-graphql";
 import { VHL_Persons } from "./persons";
 import { VHL_Roles } from "./roles";
 
@@ -18,13 +18,15 @@ export class VHL_Users extends BaseEntity {
     @Column({ type: 'varchar', length: 1000, nullable: false })
     Password!: string;
 
+    @Field(() => VHL_Persons)
     @ManyToOne(type => VHL_Persons, FK_Person => FK_Person.ID_Person,{nullable: false}) 
-    @JoinColumn({ name: "FK_Persona" })
-    FK_Person!: number;
-   
+    @JoinColumn({ name: "FK_Person" })
+    FK_Person!: VHL_Persons;
+
+    @Field(() => VHL_Roles)
     @ManyToOne(type => VHL_Roles, FK_Rol => FK_Rol.ID_Rol,{nullable: false}) 
     @JoinColumn({ name: "FK_Rol" })
-    FK_Rol!: number;
+    FK_Rol!: VHL_Roles;
 
     @Field(() => String)
     @Column({ type: 'varchar', length: 1, nullable: false })

@@ -52,6 +52,21 @@ mutation{
     name: "ruben"
   )
 }
+mutation{
+  RegisterUser(
+    password:"12345",
+    state: "a",
+    user: "wmontoya",
+    authenticated: "a",
+    fk_rol: 1,
+    direction: "no tiene",
+    identificationID: "22222222",
+    lastname2: "montoya",
+    lastname1: "arguedas",
+    name: "william"
+  )
+}
+
 
 Obtener token y logear usuario.
 
@@ -66,5 +81,25 @@ Obtener lista de todos los usuarios
   users{
     ID_User
     User
+  }
+}
+
+{
+  offerstop10{
+   ID_Offer
+    ServiceName
+    ServiceDescription
+    Price
+    Date
+    Latitude
+    Longitude
+    FK_User{
+      User
+    }
+    FK_TypeOffer{
+      TypeOffer
+    }
+    State
+    
   }
 }

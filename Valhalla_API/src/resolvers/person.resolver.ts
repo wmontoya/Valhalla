@@ -10,7 +10,7 @@ export class PersonResolver {
     async persons() {
         return VHL_Persons.find();
     }
- 
+
     @Mutation(() => Number)
     public async RegisterPerson(
         @Arg("name") name: string,
@@ -18,7 +18,6 @@ export class PersonResolver {
         @Arg("lastname2") lastname2: string,
         @Arg("identificationID") identificationID: string,
         @Arg("direction") direction: string,
-        
     ) {
         try {
             await VHL_Persons.insert({
