@@ -12,8 +12,9 @@ const routes: Routes = [
   { path: 'propuesta', component: PropuestasComponent },
   { path: 'pefil', component: PerfilComponent },
   { path: 'publicaciones', component: PublicacionesComponent },
-  { path: 'reportes', component: ReportesComponent }
+  { path: 'reportes', component: ReportesComponent },
+  { path: '**', component: InicioComponent }
 ];
 
 
-export const AppRoutingModule = RouterModule.forRoot(routes);
+export const AppRoutingModule = RouterModule.forRoot(routes,{enableTracing: true});

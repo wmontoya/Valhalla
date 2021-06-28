@@ -91,7 +91,7 @@
                         <td>{{offer.FK_TypeOffer.TypeOffer}}</td>
                         <td>{{offer.Price | currency:'₡'}}</td>
                         <td>{{offer.ServiceDescription}}</td>
-                        <td>
+                        <td style="width: 350px;">
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" [checked]="offer.State== 'A'? true:false" (change)="modificarEstado(i,$event.target)"  type="radio" name="inlineRadioOptions{{i}}" id="inlineRadio{{i}}" value="A">
                             <label class="form-check-label"  for="inlineRadio{{i}}">Activo</label>

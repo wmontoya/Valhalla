@@ -326,12 +326,13 @@ export class InicioComponent implements OnInit {
     debugger;
     if ( this.calificacion != "") {
       this.service.AgregarCalificacion(this.usurio.toString(), this.calificacion, this.listaTipoOfertas[this.selectOffer].ID_Offer).then((cali) => {
+        debugger;
         if (cali) {
          
           this.toastr.success('Se Agrego Exitosamente la Calificación.', 'Agregado', {
             timeOut: 5000,
           });
-          this.closebutton.nativeElement.click()
+          
         } else {
           this.toastr.warning('No se pudo agregar la Calificación.', 'Revisar', {
             timeOut: 5000,
@@ -353,7 +354,6 @@ export class InicioComponent implements OnInit {
           this.toastr.success('Se Agrego Exitosamente la Reseña.', 'Agregado', {
             timeOut: 5000,
           });
-          this.closebutton.nativeElement.click()
         } else {
           this.toastr.warning('No se pudo agregar la Reseña.', 'Revisar', {
             timeOut: 5000,

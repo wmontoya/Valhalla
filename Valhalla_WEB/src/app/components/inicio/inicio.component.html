@@ -128,7 +128,7 @@
 
         </div>
         <div class="card mt-2 shadow-lg p-3 mb-5 bg-body rounded"
-          *ngFor="let ofertas of listaTipoOfertas; let i = index;">
+          *ngFor="let ofertas of listaTipoOfertas; let iofertas = index;">
           <img src="./assets/images/desarrollo.jpg" height="300" class="card-img-top" alt="...">
           <div class="card-body">
             <div class="row">
@@ -163,7 +163,7 @@
                     </div>
                   </div>
                   <div class="col-4 text-end">
-                    <button type="button" (click)="agregarAmigos(i)" *ngIf="usurio != 'Usuario'" class="btn btn-outline-primary"><i class="fa fa-user-plus"
+                    <button type="button" (click)="agregarAmigos(iofertas)" *ngIf="usurio != 'Usuario'" class="btn btn-outline-primary"><i class="fa fa-user-plus"
                         aria-hidden="true"></i> Amigos
                     </button>
                   </div>
@@ -193,12 +193,12 @@
                         <th>Identificación:</th>
                         <td>{{ofertas.FK_User.FK_Person.IdentificationID}}</td>
                       </tr>
-                      <tr *ngFor="let contacts of ofertas.contacts; let i = index; ">
+                      <tr *ngFor="let contacts of ofertas.contacts; let ix = index; ">
 
-                        <th *ngIf="i % 2 == 0">{{ofertas.contacts[i].TypeContact}}:</th>
-                        <td *ngIf="i % 2 == 0">{{ofertas.contacts[i].Contact}}</td>
-                        <th *ngIf="i % 2 == 0">{{ofertas.contacts[i+1].TypeContact}}:</th>
-                        <td *ngIf="i % 2 == 0">{{ofertas.contacts[i+1].Contact}}</td>
+                        <th *ngIf="ix % 2 == 0">{{ofertas.contacts[ix].TypeContact}}:</th>
+                        <td *ngIf="ix % 2 == 0">{{ofertas.contacts[ix].Contact}}</td>
+                        <th *ngIf="ix % 2 == 0">{{ofertas.contacts[ix+1].TypeContact}}:</th>
+                        <td *ngIf="ix % 2 == 0">{{ofertas.contacts[ix+1].Contact}}</td>
 
                       </tr>
                       <tr>
@@ -214,7 +214,7 @@
                         <td>
 
                           <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"
-                            (click)="cargarInsignias(i)" class="btn btn-success">
+                            (click)="cargarInsignias(iofertas)" class="btn btn-success">
                             <i class="fa fa-handshake-o" aria-hidden="true"></i>
                           </button>
 
@@ -249,55 +249,56 @@
                             </div>
                           </div>
                         </td>
-                        <th>Reseñas:</th>
+                        <th>Reseñas: {{iofertas}}</th>
                         <td>
-                          <button type="button" (click)="cargarResenas(i)" class="btn btn-primary" data-bs-toggle="modal"
+                          <div class="modal fade" data-bs-backdrop="static" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                          aria-hidden="true">
+                          <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Reseñas y Calificaciones</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                  aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col-12">
+                                    <div class="card" *ngFor="let ren of resenasList">
+                                      <div class="card-body" >
+                                        <h5 class="card-title">{{ren.FK_User.User}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ren.Date}}</h6>
+                                        <p class="card-text">{{ren.Review}}</p>
+                                       
+                                      </div>
+                                    </div>
+                                    <div class="form-floating mt-3" *ngIf="usurio != 'Usuario'">
+                                      <textarea class="form-control" [(ngModel)]="resena" placeholder="Ingrese su comentario" id="floatingTextarea"></textarea>
+                                      <label for="floatingTextarea">Comentario{{iofertas}}</label>
+                                    </div>
+                                    <select class="form-select mt-3" placeholder="Seleccione la cantidad de estrellas" [(ngModel)]="calificacion" *ngIf="usurio != 'Usuario'" aria-label="Default select example">
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="2">4</option>
+                                      <option value="3">5</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button"  *ngIf="usurio == 'Usuario'" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" (click)="agregarCalificacion(iofertas)"  *ngIf="usurio != 'Usuario'" class="btn btn-primary">Guardar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                          <button type="button" (click)="cargarResenas(iofertas)" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#exampleModal2" [disabled]="ofertas.resena != null ? false:true"
                             class="btn btn-success"><i class="fa fa-file-text-o" aria-hidden="true"></i>
                           </button>
 
                           <!-- Modal -->
-                          <div class="modal fade" data-bs-backdrop="static" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Reseñas y Calificaciones</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  <div class="row">
-                                    <div class="col-12">
-                                      <div class="card" *ngFor="let ren of resenasList">
-                                        <div class="card-body" >
-                                          <h5 class="card-title">{{ren.FK_User.User}}</h5>
-                                          <h6 class="card-subtitle mb-2 text-muted">{{ren.Date}}</h6>
-                                          <p class="card-text">{{ren.Review}}</p>
-                                         
-                                        </div>
-                                      </div>
-                                      <div class="form-floating mt-3" *ngIf="usurio != 'Usuario'">
-                                        <textarea class="form-control" [(ngModel)]="resena" placeholder="Ingrese su comentario" id="floatingTextarea"></textarea>
-                                        <label for="floatingTextarea">Comentario</label>
-                                      </div>
-                                      <select class="form-select mt-3" placeholder="Seleccione la cantidad de estrellas" [(ngModel)]="calificacion" *ngIf="usurio != 'Usuario'" aria-label="Default select example">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="2">4</option>
-                                        <option value="3">5</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button"  *ngIf="usurio == 'Usuario'" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                  <button type="button" (click)="agregarCalificacion(i)"  *ngIf="usurio != 'Usuario'" class="btn btn-primary">Guardar</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                        
                         </td>
                       </tr>
 
