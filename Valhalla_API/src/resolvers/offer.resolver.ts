@@ -1,7 +1,11 @@
-import {Resolver, Query, Mutation, Arg } from "type-graphql";
+import {Resolver, Query, Mutation, Arg, UseMiddleware } from "type-graphql";
 import { VHL_Offers } from "../entities/offers";
-import {Between} from "typeorm";
+import {Between, getConnection} from "typeorm";
 import { VHL_TypeOffers } from "../entities/typeoffers";
+import { VHL_Reviews } from "../entities/reviews";
+import { isAuthenticated } from "../middleware/is-authenticated";
+import { VHL_Users } from "../entities/users";
+import { VHL_Images } from "../entities/images";
 
 
 @Resolver()
@@ -15,9 +19,28 @@ export class OfferResolver {
     }
 
     @Query(() => [VHL_Offers])
+    async offersByUser(
+        @Arg("Id_user") Id_user: string,
+    ) {
+        return VHL_Offers.find({where:{FK_User:Id_user},relations:["FK_User","FK_TypeOffer"]});
+    }
+
+    
+    @Query(() => [VHL_Offers])
     async offerstop10() {
-        return (await VHL_Offers.find({take:10 , 
-            relations: ["FK_User", "FK_TypeOffer","FK_User.FK_Person"]
+        return (await VHL_Offers.find({ where:{State:"A"},
+            relations: ["FK_User", "FK_TypeOffer","FK_User.FK_Person"],
+            order:{ID_Offer:"DESC"},
+            
+        }));
+    }
+
+    @Query(() => [VHL_Offers])
+    async offersacepted() {
+        return (await VHL_Offers.find({
+            relations: ["FK_User", "FK_TypeOffer","FK_User.FK_Person"],
+            order:{ID_Offer:"DESC"},
+            
         }));
     }
 
@@ -27,8 +50,6 @@ export class OfferResolver {
         return VHL_TypeOffers.find();
     }
  
-    // CANTIDAD DE SERVICIOS ENTRE FECHAS
-    // tOP SERVICIOS MEJOR VALORADOS
 
     @Mutation(() => VHL_Offers)
     public async GetOfferByDates(
@@ -42,5 +63,67 @@ export class OfferResolver {
             return 0;
         }
     }
+
+
+    @Mutation(() => String)
+    public async updateOffer(
+        @Arg("id_offer") id_offer: string,
+        @Arg("state") state: string,
+    ) {
+        try {
+             await getConnection()
+            .createQueryBuilder()
+            .update(VHL_Offers)
+            .set({ State:state })
+            .where("ID_Offer = :ID_Offer", { ID_Offer: id_offer })
+            .execute();
+            return "1";
+        } catch (err) {
+            return err;
+        }
+    }
+
+    @Mutation(() => VHL_Offers)
+    public async RegisterOffert(
+        @Arg("NombreServicio") NombreServicio: string,
+        @Arg("Precio") Precio: string,
+        @Arg("Longitud") Longitud: string,
+        @Arg("Latitud") Latitud: string,
+        @Arg("Descripcion") Descripcion: string,
+        @Arg("TypoOferta") TypoOferta: string,
+        @Arg("Imagen") Imagen: string,
+        @Arg("User_id") User_id: string,
+    ) {
+        try {
+            let toDay = new Date();
+            let response;
+            let FK_TypeOffer = new VHL_TypeOffers();
+            FK_TypeOffer.ID_TypeOffer = Number.parseInt(TypoOferta);
+            let FK_UserOffer = new VHL_Users();
+            FK_UserOffer.ID_User = Number.parseInt(User_id);
+             await VHL_Offers.insert({
+                ServiceName:NombreServicio,
+                Price:Precio,
+                Longitude:Longitud,
+                Latitude:Latitud,
+                ServiceDescription:Descripcion,
+                FK_User:FK_UserOffer,
+                FK_TypeOffer: FK_TypeOffer,
+                State:"P",
+                Date: toDay.getFullYear()+"-"+(toDay.getMonth()+1) +"-"+toDay.getDate()
+            }).then((id)=>{
+                response = id.identifiers[0]["ID_Offer"];
+            }).catch((r)=>{
+                response = r;
+            });
+            await VHL_Images.insert({Image:Imagen,FK_Offer:response});
+           return await VHL_Offers.findOne({where:{ID_Offer:response},relations: [ "FK_TypeOffer"],});
+          
+        } catch (err) {
+            return 0;
+        }
+    }
+  
+
 
 }

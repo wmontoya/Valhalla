@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img height="80" class="logo" src="../../../assets/images/Logo.png"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 ">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/publicaciones">Publicaciones</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Configuraciones</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reportes</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Alertas</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+                            data-bs-display="static">
+                            <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> {{usurio}}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                            <li *ngIf="usurio != 'Usuario'"><button href="/pefil" class="dropdown-item" type="button"><i
+                                        class="fa fa-user" aria-hidden="true"></i>
+                                    Perfil</button></li>
+
+                            <li><button class="dropdown-item" type="button"><i class="fa fa-sign-out"
+                                        aria-hidden="true"></i>
+                                    Logout</button></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="card text-center shadow-lg p-3 mb-5 bg-body rounded">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="row g-3 mt-3">
+
+                                    <h5 class="card-title">Datos Personales</h5>
+                                    <div class="col-md-2">
+                                        <i class="fa fa-user-o fa-5x shadow-lg p-1 rounded-3"></i>
+                                    </div>
+                                    <div class="col-md-4 alinear">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.Name"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" id="nombre"
+                                                placeholder="Nombre">
+                                            <label for="nombre">Nombre</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3 alinear">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.Lastname1"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"
+                                                id="apellido1" placeholder="Primer Apellido">
+                                            <label for="apellido1">Primer Apellido</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3 alinear">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.Lastname2"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"
+                                                id="apellido2" placeholder="Segundo Apellido">
+                                            <label for="apellido2">Segundo Apellido</label>
+                                        </form>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.User"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" id="usuario"
+                                                placeholder="Usuario">
+                                            <label for="usuario">Usuario</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <form class="form-floating">
+                                            <input type="password" [(ngModel)]="datosUsuario.User"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" id="contra"
+                                                placeholder="Contraseña">
+                                            <label for="contra">Contraseña</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.Rol"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" id="rol"
+                                                placeholder="Rol">
+                                            <label for="correo">Rol</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea [(ngModel)]="datosUsuario.Direction"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"
+                                                placeholder="Ingrese su Dirección" id="direccion"></textarea>
+                                            <label for="direccion">Dirección</label>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <h5 class="card-title">Datos de Contacto</h5>
+                                    <div class="col-md-6">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.Telefono"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" id="telefono"
+                                                placeholder="Número de Teléfono">
+                                            <label for="telefono">Teléfono Celular</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form class="form-floating">
+                                            <input type="email" [(ngModel)]="datosUsuario.Correo"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" id="correo"
+                                                placeholder="name@example.com">
+                                            <label for="correo">Correo Electronico</label>
+                                        </form>
+                                    </div>
+                                    <hr>
+                                    <h5 class="card-title">Datos Academicos</h5>
+                                    <div class="col-md-12">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.TitleName"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" id="titulo"
+                                                placeholder="Nombre del titulo">
+                                            <label for="titulo">Nombre del Título</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.TitleInstitution"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"
+                                                id="institucion" placeholder="Institución">
+                                            <label for="institucion">Institución</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.StartYear"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" id="inicio"
+                                                placeholder="Año de Inicio">
+                                            <label for="inicio">Año de Inicio</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <form class="form-floating">
+                                            <input type="text" [(ngModel)]="datosUsuario.EndYear"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" id="fin"
+                                                placeholder="Añor de Fin">
+                                            <label for="fin">Año de Fin</label>
+                                        </form>
+                                    </div>
+                                    <!-- <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    </div> -->
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="card text-center shadow-lg p-3 mb-5 bg-body rounded">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4 "></div>
+                            <div class="col-4">
+                                <h5 class="card-title">Lista de Ofertas Realizadas</h5>
+                            </div>
+                            <div class="col-4 text-end">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop"><i class="fa fa-plus-circle"></i>
+                                    Nuevo
+                                </button>
+
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Categoria</th>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Nom. Servicio</th>
+                                            <th scope="col">Desc. Servicio</th>
+                                            <th scope="col">Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let oferta of myOffers; let i = index;">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{oferta.TypeOffer}}</td>
+                                            <td>{{oferta.Date}}</td>
+                                            <td>{{oferta.Price| currency:'₡'}}</td>
+                                            <td>{{oferta.ServiceName}}</td>
+                                            <td>{{oferta.ServiceDescription}}</td>
+                                            <td>{{oferta.State}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Nueva Oferta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+
+                        <h5 class="card-title">Datos Personales</h5>
+
+                        <div class="col-md-6">
+                            <form class="form-floating">
+                                <input type="text" [(ngModel)]="datosOferta.NombreServicio"
+                                    [ngModelOptions]="{standalone: true}" class="form-control" id="nom"
+                                    placeholder="Nombre del Servicio">
+                                <label for="nom">Nombre del Servicio</label>
+                            </form>
+                        </div>
+                        <div class="col-md-6 ">
+                            <form class="form-floating">
+                                <input type="text" [(ngModel)]="datosOferta.Precio"
+                                    [ngModelOptions]="{standalone: true}" class="form-control" id="precio"
+                                    placeholder="Precio">
+                                <label for="precio">Precio Por Hora</label>
+                            </form>
+                        </div>
+                        <div class="col-md-6 ">
+                            <form class="form-floating">
+                                <input type="text" [(ngModel)]="datosOferta.Longitud"
+                                    [ngModelOptions]="{standalone: true}" class="form-control" id="lon"
+                                    placeholder="Longitud">
+                                <label for="lon">Longitud</label>
+                            </form>
+                        </div>
+
+                        <div class="col-md-6">
+                            <form class="form-floating">
+                                <input type="text" [(ngModel)]="datosOferta.Latitud"
+                                    [ngModelOptions]="{standalone: true}" class="form-control" id="lat"
+                                    placeholder="Latitud">
+                                <label for="lat">Latitude</label>
+                            </form>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea [(ngModel)]="datosOferta.Descripcion" [ngModelOptions]="{standalone: true}"
+                                    class="form-control" placeholder="Ingrese su Dirección" id="descrip"></textarea>
+                                <label for="descrip">Descripción</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+
+                            <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems"
+                                [ngModelOptions]="{standalone: true}" [settings]="dropdownSettings"
+                                (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                            </angular2-multiselect>
+
+                        </div>
+                        <div class="col-md-6" *ngIf="nuevaTipoOferta">
+                            <form class="form-floating">
+                                <input type="text" [(ngModel)]="datosOferta.TypoOferta"
+                                    [ngModelOptions]="{standalone: true}" class="form-control" id="lat"
+                                    placeholder="Latitud">
+                                <label for="lat">Latitude</label>
+                            </form>
+                        </div>
+                        <div class="col-md-12">
+                            <form class="form">
+
+                                <input class="form-control" accept="image/*" (change)="changeListener($event)"
+                                    type="file" id="formFile">
+                                <!-- <input type="file" accept="image/*" (change)="changeListener($event)"> -->
+                                <div *ngIf="datosOferta.Imagen">
+                                    <h4>Imagen a Cargar:</h4>
+                                    <img height="150" width="150" src="{{datosOferta.Imagen}}" alt="">
+                                </div>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" (click)="nuevaOferta()" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="card text-center shadow-lg p-3 mb-5 bg-body rounded">
+                <div class="card-body">
+                    <h5 class="card-title">Lista de Amigos</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Titulo</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Servicios</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let amigo of listaAmigos; let i = index;">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{amigo.nombre}}</td>
+                                    <td>{{amigo.tit}}</td>
+                                    <td>{{amigo.tel}}</td>
+                                    <td>{{amigo.corr}}</td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+</body>
+
+</html>

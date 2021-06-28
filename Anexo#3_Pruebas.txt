@@ -67,6 +67,22 @@ mutation{
   )
 }
 
+mutation{
+  RegisterUser(
+    password:"12345",
+    state: "A",
+    user: pchaves
+    authenticated: "A",
+    fk_rol: 1,
+    direction: "no tiene",
+    identificationID: "788890087",
+    lastname2: "Chaves",
+    lastname1: "Murillo",
+    name: "Pablo"
+  )
+}
+
+
 
 Obtener token y logear usuario.
 

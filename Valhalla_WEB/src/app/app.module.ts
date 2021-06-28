@@ -22,6 +22,13 @@ import { FormsModule } from '@angular/forms';
 import { PublicacionesComponent } from './components/publicaciones/publicaciones.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { ReportesComponent } from './components/reportes/reportes.component';
+import { ComparacionesComponent } from './components/comparaciones/comparaciones.component';
+
 
 @NgModule({
   declarations: [
@@ -30,8 +37,15 @@ import { AgmCoreModule } from '@agm/core';
     PerfilComponent,
     PropuestasComponent,
     PublicacionesComponent,
+    ReportesComponent,
+    ComparacionesComponent,
   ],
   imports: [
+    CommonModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,}),
+    AngularMultiSelectModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AppService } from '../../services/app-service'
 
 @Component({
@@ -8,27 +9,52 @@ import { AppService } from '../../services/app-service'
 })
 export class PublicacionesComponent implements OnInit {
 
-  public fechaInicio:any;
-  public fechaFinal:any;
+  public estado = "";
   public usurio: String = "Usuario";
   public listaTipoOfertas: any[] = [];
 
 
-  constructor(service: AppService) {
+  constructor(public service: AppService, public toastr: ToastrService) {
 
-    service.listarTodoTipoOfertas().then((response) => {
-      response.forEach(element => {
-        this.listaTipoOfertas.push({ id: element.ID_TypeOffer, typeoffer: element.TypeOffer, value: false });
+
+  }
+
+
+  cargarOffertas(){
+    this.service.listarOfertasPendientes().then((offertas) => {
+      offertas.forEach(element => {
+        console.log(element);
+
+        this.listaTipoOfertas.push(element);
       });
+
     })
+
   }
 
   ngOnInit(): void {
-
+    if (localStorage.getItem("Usuario") != "") {
+      this.usurio = localStorage.getItem("Usuario")!.toString();
+    }
+    this.cargarOffertas();
   }
 
-  ModificarMemoria(index: number) {
-    this.listaTipoOfertas[index].value = !this.listaTipoOfertas[index].value;
+  logout() {
+    localStorage.setItem("Usuario", "");
+    this.usurio = "Usuario";
+  }
+  modificarEstado(index:number,value:any) {
+   this.service.modificarEstadoOffertas(this.listaTipoOfertas[index].ID_Offer,value.value).then((response)=>{
+   if(response.toString() == "1"){
+    this.toastr.success('Se Agrego Exitosamente la Calificación.', 'Agregado', {
+      timeOut: 5000,
+    });
+   }else{
+    this.toastr.warning('No se pudo agregar la Calificación.', 'Revisar', {
+      timeOut: 5000,
+    });
+   }
+   });
   }
 
 }

@@ -11,4 +11,112 @@ agm-map{
     color: blue;
 }
 
+::ng-deep .c-btn {
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+}
+::ng-deep .selected-list .c-list .c-token {
+    background: #0079fe;
+    border-radius: 40px !important;
+    padding-top:  10px !important;
+    padding-bottom:  10px !important;
+   
+}
+::ng-deep .c-label{
+    margin-left: 10px !important;
+}
+::ng-deep .selected-list .c-list .c-token .c-label {
+    color: #fff;
+}
+::ng-deep .selected-list .c-list .c-token .c-remove svg {
+    fill: #fff;
+}
+::ng-deep .selected-list .c-angle-down svg, ::ng-deep .selected-list .c-angle-up svg {
+    fill: #333;
+}
+::ng-deep .dropdown-list ul li:hover {
+    background: #f5f5f5;
+}
+::ng-deep .arrow-up, ::ng-deep .arrow-down {
+    border-bottom: 15px solid #fff;
+}
+::ng-deep .arrow-2 {
+    border-bottom: 15px solid #ccc;
+}
+::ng-deep .list-area {
+    border: 1px solid #ccc;
+    background: #fff;
+    box-shadow: 0px 1px 5px #959595;
+}
+::ng-deep .select-all {
+    border-bottom: 1px solid #ccc;
+}
+::ng-deep .list-filter {
+    border-bottom: 1px solid #ccc;
+}
+::ng-deep .list-filter .c-search svg {
+    fill: #888;
+}
+::ng-deep .list-filter .c-clear svg {
+    fill: #888;
+}
+::ng-deep .pure-checkbox input[type="checkbox"]:focus + label:before, ::ng-deep .pure-checkbox input[type="checkbox"]:hover + label:before {
+    border-color: #0079fe;
+    background-color: #f2f2f2;
+}
+::ng-deep .pure-checkbox input[type="checkbox"] + label {
+    color: #000;
+}
+::ng-deep .pure-checkbox input[type="checkbox"] + label:before {
+    color: #0079fe;
+    border: 2px solid #0079fe;
+}
+::ng-deep .pure-checkbox input[type="checkbox"] + label:after {
+    background-color: #0079fe;
+}
+::ng-deep .pure-checkbox input[type="checkbox"]:disabled + label:before {
+    border-color: #ccc;
+}
+::ng-deep .pure-checkbox input[type="checkbox"]:disabled:checked + label:before {
+    background-color: #ccc;
+}
+::ng-deep .pure-checkbox input[type="checkbox"] + label:after {
+    border-color: #fff;
+}
+::ng-deep .pure-checkbox input[type="radio"]:checked + label:before {
+    background-color: white;
+}
+::ng-deep .pure-checkbox input[type="checkbox"]:checked + label:before {
+    background: #0079fe;
+}
+::ng-deep .selected-item {
+    background: #e9f4ff;
+}
+::ng-deep .btn-iceblue {
+    background: #0079fe;
+    border: 1px solid #ccc;
+    color: #fff;
+}
+:host ::ng-deep .c-btn {
+    padding-right: 1.3rem !important;
+}
 
+.gold{
+    color: gold;
+}
+.negras{
+    color: #353535 !important;
+}
+
+.fillCol{
+    width: 100% !important;
+}
+
+::ng-deep.modal{
+    pointer-events: none;
+}
+
+::ng-deep.modal-dialog{
+    pointer-events: all;
+ }
