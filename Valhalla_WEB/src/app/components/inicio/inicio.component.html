@@ -293,7 +293,7 @@
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button"  *ngIf="usurio == 'Usuario'" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                  <button type="button" #closebutton (click)="agregarCalificacion(i)"  *ngIf="usurio != 'Usuario'" class="btn btn-primary">Guardar</button>
+                                  <button type="button" (click)="agregarCalificacion(i)"  *ngIf="usurio != 'Usuario'" class="btn btn-primary">Guardar</button>
                                 </div>
                               </div>
                             </div>

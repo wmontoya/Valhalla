@@ -323,8 +323,8 @@ export class InicioComponent implements OnInit {
 
   agregarCalificacion(index: number) {
     this.selectOffer = index;
-
-    if (this.calificacion != undefined || this.calificacion != "") {
+    debugger;
+    if ( this.calificacion != "") {
       this.service.AgregarCalificacion(this.usurio.toString(), this.calificacion, this.listaTipoOfertas[this.selectOffer].ID_Offer).then((cali) => {
         if (cali) {
          
@@ -345,7 +345,7 @@ export class InicioComponent implements OnInit {
       })
     }
 
-    if (this.resena != undefined || this.resena != "") {
+    if (this.resena != "") {
       this.service.AgregarResena(this.usurio.toString(), this.resena, this.listaTipoOfertas[this.selectOffer].ID_Offer).then((rese) => {
 
         if (rese) {

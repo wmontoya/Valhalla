@@ -93,15 +93,15 @@
                         <td>{{offer.ServiceDescription}}</td>
                         <td>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" checked="true" (change)="modificarEstado(i,$event.target)"  type="radio" name="inlineRadioOptions{{i}}" id="inlineRadio{{i}}" value="A">
+                            <input class="form-check-input" [checked]="offer.State== 'A'? true:false" (change)="modificarEstado(i,$event.target)"  type="radio" name="inlineRadioOptions{{i}}" id="inlineRadio{{i}}" value="A">
                             <label class="form-check-label"  for="inlineRadio{{i}}">Activo</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" checked="false" (change)="modificarEstado(i,$event.target)" type="radio" name="inlineRadioOptions{{i}}" id="inlineRadio{{i}}" value="I">
+                            <input class="form-check-input" [checked]="offer.State== 'I'? true:false" (change)="modificarEstado(i,$event.target)" type="radio" name="inlineRadioOptions{{i}}" id="inlineRadio{{i}}" value="I">
                             <label class="form-check-label" for="inlineRadio{{i}}">Inactivo</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" checked="false" (change)="modificarEstado(i,$event.target)"  type="radio" name="inlineRadioOptions{{i}}" id="inlineRadio{{i}}" value="P">
+                            <input class="form-check-input"[checked]="offer.State== 'P'? true:false" (change)="modificarEstado(i,$event.target)"  type="radio" name="inlineRadioOptions{{i}}" id="inlineRadio{{i}}" value="P">
                             <label class="form-check-label" for="inlineRadio{{i}}">Pendiente</label>
                           </div>
                         </td>
